@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:deal/models/custom_user.dart';
+import 'package:provider/provider.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -8,10 +9,10 @@ class AuthService {
     return user != null ? CustomUser(uid: user.uid) : null;
   }
 
-  // //auth change user stream
-  // Stream<CustomUser> get user {
-  //   return _auth.authStateChanges().first;
-  // }
+  //auth change user stream
+  Stream<CustomUser?> get user {
+    return _auth.authStateChanges().map(_userFromFirebase);
+  }
 
   //sign in anonymus
   Future signInAnon() async {
@@ -29,4 +30,12 @@ class AuthService {
   //register email password
 
   //sign out
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }
