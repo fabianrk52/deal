@@ -1,10 +1,11 @@
 import 'package:deal/models/custom_user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/services/auth.dart';
 
 class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+  const Register({Key? key, this.toggleView}) : super(key: key);
+
+  final VoidCallback? toggleView;
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -22,6 +23,12 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.yellow[500],
         elevation: 0.0,
         title: Text("Logo"),
+        actions: [
+          ElevatedButton.icon(
+              onPressed: widget.toggleView,
+              icon: const Icon(Icons.person),
+              label: const Text("Sign In"))
+        ],
       ),
       body: Container(
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -29,7 +36,7 @@ class _RegisterState extends State<Register> {
             child: Column(
               children: [
                 const Text(
-                  "Sign In",
+                  "Register",
                   style: TextStyle(fontSize: 32.0),
                 ),
                 const SizedBox(height: 20.0),
@@ -56,9 +63,9 @@ class _RegisterState extends State<Register> {
                       CustomUser? result =
                           await _auth.Register(email, password);
                       if (result == null) {
-                        print("error signin");
+                        print("error Register");
                       } else {
-                        print("signed in");
+                        print("register");
                         print(result.uid);
                       }
                     }),

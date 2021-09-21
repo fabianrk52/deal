@@ -1,4 +1,4 @@
-import 'package:deal/screens/authenticate/log_in_form.dart';
+import 'package:deal/screens/authenticate/log_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:deal/models/custom_user.dart';
 import 'package:provider/provider.dart';

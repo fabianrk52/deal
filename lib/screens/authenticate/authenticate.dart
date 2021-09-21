@@ -1,8 +1,7 @@
-import 'package:deal/screens/authenticate/log_in_form.dart';
+import 'package:deal/screens/authenticate/log_in.dart';
 import 'package:flutter/material.dart';
-import 'sign_in.dart';
 import 'register.dart';
-import 'log_in_form.dart';
+import 'log_in.dart';
 
 class Authenticate extends StatefulWidget {
   const Authenticate({Key? key}) : super(key: key);
@@ -12,8 +11,15 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
+  bool showSignIn = true;
+  void toogleView() {
+    setState(() => showSignIn = !showSignIn);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return LogInForm();
+    return (showSignIn == true)
+        ? LogIn(toggleView: toogleView)
+        : Register(toggleView: toogleView);
   }
 }

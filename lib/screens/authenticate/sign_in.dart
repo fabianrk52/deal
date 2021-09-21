@@ -20,6 +20,7 @@ class _SignInState extends State<SignIn> {
         backgroundColor: Colors.yellow[500],
         elevation: 0.0,
         title: Text("Sign In"),
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.person))],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),

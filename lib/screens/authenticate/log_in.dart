@@ -1,16 +1,17 @@
 import 'package:deal/models/custom_user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/services/auth.dart';
 
-class LogInForm extends StatefulWidget {
-  const LogInForm({Key? key}) : super(key: key);
+class LogIn extends StatefulWidget {
+  const LogIn({Key? key, this.toggleView}) : super(key: key);
+
+  final VoidCallback? toggleView;
 
   @override
-  _LogInFormState createState() => _LogInFormState();
+  _LogInState createState() => _LogInState();
 }
 
-class _LogInFormState extends State<LogInForm> {
+class _LogInState extends State<LogIn> {
   final AuthService _auth = AuthService();
   String email = '';
   String password = '';
@@ -22,6 +23,12 @@ class _LogInFormState extends State<LogInForm> {
         backgroundColor: Colors.yellow[500],
         elevation: 0.0,
         title: Text("Logo"),
+        actions: [
+          ElevatedButton.icon(
+              onPressed: widget.toggleView,
+              icon: const Icon(Icons.person),
+              label: const Text("Register"))
+        ],
       ),
       body: Container(
           padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
