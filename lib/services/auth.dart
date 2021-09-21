@@ -1,3 +1,4 @@
+import 'package:deal/screens/authenticate/log_in_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:deal/models/custom_user.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,30 @@ class AuthService {
   }
   //sign email password
 
+  Future LogIn(email, password) async {
+    try {
+      UserCredential? result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      CustomUser? _user = _userFromFirebase(result.user);
+      return _user;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   //register email password
+  Future Register(email, password) async {
+    try {
+      UserCredential? result = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      CustomUser? _user = _userFromFirebase(result.user);
+      return _user;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 
   //sign out
   Future signOut() async {
