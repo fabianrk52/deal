@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:deal/services/auth.dart';
 
 class Home extends StatelessWidget {
+  Home({Key? key}) : super(key: key);
+
   final AuthService _auth = AuthService();
 
   @override

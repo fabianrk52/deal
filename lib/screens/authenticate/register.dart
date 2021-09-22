@@ -1,4 +1,3 @@
-import 'package:deal/models/custom_user.dart';
 import 'package:flutter/material.dart';
 import 'package:deal/services/auth.dart';
 
@@ -26,12 +25,12 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
         backgroundColor: Colors.yellow[500],
         elevation: 0.0,
-        title: Text("Logo"),
+        title: const Icon(Icons.list),
         actions: [
           ElevatedButton.icon(
               onPressed: widget.toggleView,
               icon: const Icon(Icons.person),
-              label: const Text("Sign In"))
+              label: const Text("Sign In")),
         ],
       ),
       body: Container(
@@ -69,7 +68,7 @@ class _RegisterState extends State<Register> {
                     ),
                     onPressed: () async {
                       if (_formkey.currentState!.validate()) {
-                        dynamic result = await _auth.Register(email, password);
+                        dynamic result = await _auth.register(email, password);
                         if (result == null) {
                           setState(() => error = "Please supply a valid email");
                         }

@@ -1,7 +1,5 @@
-import 'package:deal/screens/authenticate/log_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:deal/models/custom_user.dart';
-import 'package:provider/provider.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -28,7 +26,7 @@ class AuthService {
   }
   //sign email password
 
-  Future LogIn(email, password) async {
+  Future signIn(email, password) async {
     try {
       UserCredential? result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -41,7 +39,7 @@ class AuthService {
   }
 
   //register email password
-  Future Register(email, password) async {
+  Future register(email, password) async {
     try {
       UserCredential? result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
