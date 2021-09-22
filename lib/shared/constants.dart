@@ -10,3 +10,7 @@ const textInputDecoration = InputDecoration(
     borderSide: BorderSide(color: Colors.yellow, width: 2.0),
   ),
 );
+
+RegExp nameRegEx = RegExp(
+  r"^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)",
+);

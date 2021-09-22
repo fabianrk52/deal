@@ -11,9 +11,19 @@ class DatabaseService {
     return userCollection.doc(uid);
   }
 
-  Future updateUserData(String name, String surname, String uid) async {
-    return userCollection
-        .doc(uid)
-        .set({"name": name, "surname": surname, "uid": uid});
+  Future updateUserData(
+      String name, String surname, String email, String uid) async {
+    return userCollection.doc(uid).set({
+      "name": name,
+      "surname": surname,
+      "email": email,
+      "deals": [],
+      "uid": uid
+    });
+  }
+
+  //get users stream
+  Stream<QuerySnapshot> get users {
+    return userCollection.snapshots();
   }
 }

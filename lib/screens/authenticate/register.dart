@@ -19,6 +19,8 @@ class _RegisterState extends State<Register> {
 
   String email = '';
   String password = '';
+  String name = '';
+  String surname = '';
 
   String error = '';
   @override
@@ -42,11 +44,13 @@ class _RegisterState extends State<Register> {
                     vertical: 20.0, horizontal: 50.0),
                 child: Form(
                   key: _formkey,
-                  child: Column(
+                  child: ListView(
                     children: [
-                      const Text(
-                        "Register",
-                        style: TextStyle(fontSize: 32.0),
+                      const Center(
+                        child: Text(
+                          "Register",
+                          style: TextStyle(fontSize: 32.0),
+                        ),
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
@@ -71,13 +75,35 @@ class _RegisterState extends State<Register> {
                         },
                       ),
                       const SizedBox(height: 20.0),
+                      TextFormField(
+                        decoration:
+                            textInputDecoration.copyWith(hintText: "Name"),
+                        validator: (val) => nameRegEx.hasMatch(val!)
+                            ? "Enter valid Name"
+                            : null,
+                        onChanged: (val) {
+                          setState(() => name = val);
+                        },
+                      ),
+                      const SizedBox(height: 20.0),
+                      TextFormField(
+                        decoration:
+                            textInputDecoration.copyWith(hintText: "Surname"),
+                        validator: (val) => nameRegEx.hasMatch(val!)
+                            ? "Enter valid Surname"
+                            : null,
+                        onChanged: (val) {
+                          setState(() => surname = val);
+                        },
+                      ),
+                      const SizedBox(height: 20.0),
                       ElevatedButton(
                           child: const Text("Register"),
                           onPressed: () async {
                             if (_formkey.currentState!.validate()) {
                               setState(() => loading = true);
-                              dynamic result =
-                                  await _auth.register(email, password);
+                              dynamic result = await _auth.register(
+                                  email, password, name, surname);
                               if (result == null) {
                                 setState(() {
                                   error = "Please supply a valid email";
