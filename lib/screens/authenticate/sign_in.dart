@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:deal/services/auth.dart';
+import 'package:deal/shared/constants.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key, this.toggleView}) : super(key: key);
@@ -25,9 +26,8 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.yellow[500],
         elevation: 0.0,
-        title: const Icon(Icons.list),
         actions: [
-          ElevatedButton.icon(
+          TextButton.icon(
               onPressed: widget.toggleView,
               icon: const Icon(Icons.person),
               label: const Text("Register"))
@@ -45,6 +45,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
+                  decoration: textInputDecoration.copyWith(hintText: "Email"),
                   validator: (val) => val!.isEmpty ? "Enter an email" : null,
                   onChanged: (val) {
                     setState(() => email = val);
@@ -52,6 +53,8 @@ class _SignInState extends State<SignIn> {
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
+                  decoration:
+                      textInputDecoration.copyWith(hintText: "Password"),
                   obscureText: true,
                   validator: (val) =>
                       val!.length < 6 ? "Enter a password 6+ chars" : null,
@@ -61,11 +64,7 @@ class _SignInState extends State<SignIn> {
                 ),
                 const SizedBox(height: 20.0),
                 ElevatedButton(
-                    child: Icon(
-                      Icons.send,
-                      size: 20.0,
-                      color: Colors.blue[200],
-                    ),
+                    child: const Text("Sign In"),
                     onPressed: () async {
                       if (_formkey.currentState!.validate()) {
                         dynamic result = await _auth.signIn(email, password);
